@@ -31,9 +31,9 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
         // var resourceAccess = new HashMap<>(jwt.getClaim("resource_access"));
         // var eternal = (Map<String, List<String>>) resourceAccess.get("account");
         var realmAccess = new HashMap<>(jwt.getClaim("realm_access"));
-        System.out.println(realmAccess);
+        // System.out.println(realmAccess);
         var roles = (List<String>) realmAccess.get("roles");
-        System.out.println(roles);
+        // System.out.println(roles);
         return roles.stream()
                 //  spring 角色默认是 `ROLE_[角色名称]`，并且若角色名称中有 `-`，需替换为 `_`
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.replace("-", "_")))

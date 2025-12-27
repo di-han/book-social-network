@@ -58,9 +58,9 @@ jobs:
       - name: Copy docker-compose.yml to remote server
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.ESC_HOST }}
+          username: ${{ secrets.ESC_USERNAME }}
+          key: ${{ secrets.ESC_SSH_KEY }}
           source: "docker-compose.yml"
           target: "/ci-cd/"  # 或你希望放置的目录
           strip_components: 1

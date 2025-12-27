@@ -10,7 +10,6 @@ import static org.springframework.http.HttpStatus.*;
 public enum BusinessErrorCodes {
 
     NO_CODE(0, NOT_IMPLEMENTED, "No code"), // 调用构造方法 BusinessErrorCodes(0, NOT_IMPLEMENTED, "No code")
-    ACCESS_DENIED(201, BAD_REQUEST, "拒绝此用户请求"),
     INCORRECT_CURRENT_PASSWORD(300, BAD_REQUEST, "当前密码不正确"),
     NEW_PASSWORD_DOES_NOT_MATCH(301, BAD_REQUEST, "新密码不匹配"),
     ACCOUNT_LOCKED(302, FORBIDDEN, "用户账户已被锁定"),

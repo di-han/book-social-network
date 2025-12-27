@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
-import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -51,14 +50,14 @@ public class GlobalExceptionHandler {
 
     // 不良凭证异常
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ExceptionResponse> handleException(BadCredentialsException exp) {
+    public ResponseEntity<ExceptionResponse> handleException() {
         return ResponseEntity
                 .status(UNAUTHORIZED)
                 .body(
                         ExceptionResponse.builder()
                                 .businessErrorCode(BAD_CREDENTIALS.getCode())
                                 .businessErrorDescription(BAD_CREDENTIALS.getDescription())
-                                .error(exp.getMessage())
+                                .error(BAD_CREDENTIALS.getDescription())
                                 .build()
                 );
     }
@@ -106,20 +105,6 @@ public class GlobalExceptionHandler {
                 .status(BAD_REQUEST)
                 .body(
                         ExceptionResponse.builder()
-                                .error(exp.getMessage())
-                                .build()
-                );
-    }
-
-    // 角色权限不足
-    @ExceptionHandler(AuthorizationDeniedException.class)
-    public ResponseEntity<ExceptionResponse> handleException(AuthorizationDeniedException exp) {
-        return ResponseEntity
-                .status(BAD_REQUEST)
-                .body(
-                        ExceptionResponse.builder()
-                                .businessErrorCode(ACCESS_DENIED.getCode())
-                                .businessErrorDescription(ACCESS_DENIED.getDescription())
                                 .error(exp.getMessage())
                                 .build()
                 );

@@ -1,9 +1,10 @@
 // src/plugins/keycloak.js
 
 import keycloakService from "@/services/keycloak/keycloak";
+import type {App} from "vue";
 
 export default {
-  install: (app) => {
+  install: (app: App) => {
     // 使用 provide/inject，这是 Vue 3 推荐的跨组件通信方式
     app.provide("keycloak", keycloakService);
 

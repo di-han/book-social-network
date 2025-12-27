@@ -1,6 +1,7 @@
 package com.hd.book.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -24,6 +25,8 @@ import java.util.List;
 public class BeansConfig {
 
     // private final UserDetailsService userDetailsService;
+    @Value("application.cors.origins:*")
+    private List<String> allowedOrigin;
 
     /*@Bean
     public AuthenticationProvider authenticationProvider() {
@@ -60,7 +63,7 @@ public class BeansConfig {
         // 是否允许发送 Cookie 和其他凭证信息
         config.setAllowCredentials(true);
         // 允许的源
-        config.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:8080"));
+        config.setAllowedOrigins(allowedOrigin);
         // 允许的请求头
         config.setAllowedHeaders(Arrays.asList(
                 HttpHeaders.ORIGIN,

@@ -17,26 +17,53 @@ services:
     restart: unless-stopped # 容器的重启策略
   # 要使用邮件功能，需要配置一个 SMTP 主机或就像需要配置服务器或邮件链接服务器等等
   # 更好的选择，那就是一个容器。有一种东西叫 maildev，
-  mail-dev:
-    container_name: mail-dev-bsn
-    image: maildev/maildev
-    ports:
-      - 1080:1080 # web 程序端口
-      - 1025:1025 # 应用程序使用端口
-    networks:
-      - spring-demo
+#  mail-dev:
+#    container_name: mail-dev-bsn
+#    image: maildev/maildev
+#    ports:
+#      - 1080:1080 # web 程序端口
+#      - 1025:1025 # 应用程序使用端口
+#    networks:
+#      - spring-demo
   keycloak:
-    container_name: keycloak-bsn
+    container_name: keycloak-24
     image: quay.io/keycloak/keycloak:24.0.2
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+      # 代理设置，确保 Keycloak 知道它是通过什么地址被外部访问的 (解决重定向问题)
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 9090
+      KC_HOSTNAME_STRICT_BACKCHANNEL: true
+      KC_HTTP_ENABLED: true
     ports:
       - 9090:8080
+    volumes:
+      - ./keycloak/realm:/opt/keycloak/data/import
+      - ./keycloak/themes:/opt/keycloak/themes
     networks:
       - spring-demo
-    command:
-      - "start-dev"
+    command: start-dev --import-realm
+  bsn-api:
+    container_name: bsn-api
+    image: handi8/bsn:1.0.0
+    ports:
+      - 8088:8088
+    volumes:
+      - bsn-api-storage:/app/uploads
+    networks:
+      - spring-demo
+    depends_on:
+      - postgres
+  bsn-ui:
+    container_name: bsn-ui
+    image: handi8/bsn-ui:1.0.0
+    ports:
+      - 8080:80
+    networks:
+      - spring-demo
+    depends_on:
+      - bsn-api
 networks:
   spring-demo:
     driver: bridge # 使用桥接网络驱动 (默认)
@@ -44,3 +71,5 @@ networks:
 volumes:
   postgres: # 定义一个名为 postgres 的卷
     driver: local # 使用本地驱动 (默认)
+  bsn-api-storage:
+    driver: local

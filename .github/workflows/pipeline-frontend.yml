@@ -59,8 +59,8 @@ jobs:
             
             rm docker-compose.dev.yml
             # 如果不存在，请下载 docker-compose.dev.yml
-            if [ ! -f docker-compose.dev.yml ]; then
-              curl -o docker-compose.dev.yml https://github.com/di-han/book-social-network/blob/ci/pipeline/docker-compose.yml
+            if [ ! -f docker-compose.yml ]; then
+              curl -o docker-compose.yml https://github.com/di-han/book-social-network/blob/ci/pipeline/docker-compose.yml
             fi
             
             # Pull latest image

@@ -27,9 +27,6 @@ jobs: # 定义此管道的工作，工作流运行由一个或多个作业组成
         with:
           distribution: 'corretto' # Java 发行版
           java-version: '17' # 要设置的Java版本。接受整数或半版本号的Java版本号
-          
-      - name: Change wrapper permissions
-        run: chmod +x ./mvnw
         
       - name: Compiler project
         run: | # 使用操作系统的 shell 运行命令行程序，铺设管道`|`运行多个命令
@@ -50,9 +47,6 @@ jobs: # 定义此管道的工作，工作流运行由一个或多个作业组成
         with:
           distribution: 'corretto'
           java-version: '17'
-      
-      - name: Change wrapper permissions
-        run: chmod +x ./mvnw
 
       - name: Running Unit Tests
         run: |
@@ -74,9 +68,6 @@ jobs: # 定义此管道的工作，工作流运行由一个或多个作业组成
         with:
           distribution: 'corretto'
           java-version: '17'
-          
-      - name: Change wrapper permissions
-        run: chmod +x ./mvnw
 
       - name: Build project
         run: |

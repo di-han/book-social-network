@@ -31,7 +31,7 @@ jobs: # 定义此管道的工作，工作流运行由一个或多个作业组成
       - name: Compiler project
         run: | # 使用操作系统的 shell 运行命令行程序，铺设管道`|`运行多个命令
           cd book-network
-          ./mvnw clean compiler
+          ./mvnw clean compile
 
   unit-tests: # 单元测试
     name: Unit tests

@@ -131,7 +131,7 @@ jobs: # 定义此管道的工作，工作流运行由一个或多个作业组成
           script: |
             cd /ci-cd || mkdir -p /ci-cd && cd /ci-cd
               
-            rm docker-compose.dev.yml
+            rm docker-compose.yml
             # 如果不存在，请下载 docker-compose.dev.yml
             if [ ! -f docker-compose.yml ]; then
               curl -o docker-compose.yml https://github.com/di-han/book-social-network/blob/ci/pipeline/docker-compose.yml

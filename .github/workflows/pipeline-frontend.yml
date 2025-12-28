@@ -46,6 +46,9 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [build-image]
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
       - name: Create deployment folder
         uses: appleboy/ssh-action@v1.0.0
         with: 

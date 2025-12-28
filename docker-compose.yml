@@ -31,11 +31,10 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      # 代理设置，确保 Keycloak 知道它是通过什么地址被外部访问的 (解决重定向问题)
-      KC_HOSTNAME: localhost
-      KC_HOSTNAME_PORT: 9090
-      KC_HOSTNAME_STRICT_BACKCHANNEL: true
+      KC_HOSTNAME: 47.97.169.64
+      KC_PROXY: edge
       KC_HTTP_ENABLED: true
+      KC_FEATURES: token-exchange
     ports:
       - 9090:8080
     volumes:

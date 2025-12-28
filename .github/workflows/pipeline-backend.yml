@@ -150,6 +150,8 @@ jobs: # 定义此管道的工作，工作流运行由一个或多个作业组成
           port: ${{ secrets.ESC_PORT }}
           # passphrase: ${{ secrets.VPS_SSH_KEY_PASSPHRASE }} 有则添加
           script: |
+            cd /ci-cd
+            
             # Pull latest image
             docker compose -f docker-compose.yml pull
           

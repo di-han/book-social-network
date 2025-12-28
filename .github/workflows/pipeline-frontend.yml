@@ -62,8 +62,7 @@ jobs:
           username: ${{ secrets.ESC_USERNAME }}
           key: ${{ secrets.ESC_SSH_KEY }}
           source: "docker-compose.yml"
-          target: "/ci-cd/"  # 或你希望放置的目录
-          strip_components: 1
+          target: "/ci-cd"  # 或你希望放置的目录
         
       - name: Deploy to ESC
         uses: appleboy/ssh-action@v1.0.0

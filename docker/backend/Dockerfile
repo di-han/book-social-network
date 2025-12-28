@@ -32,7 +32,7 @@ ARG APP_VERSION=1.0.0
 WORKDIR /app
 
 # 将构建阶段工作目录中的 jar 文件复制到本阶段的工作目录中，体现第一阶段 FROM 时 AS build 的一个作用
-COPY --from=build /build/target/book-network-*.jar /app/
+COPY --from=build /build/target/book-network-*.jar /app/app.jar
 
 # 暴露端口
 EXPOSE 8088
@@ -41,13 +41,10 @@ EXPOSE 8088
 ENV DB_URL=jdbc:postgresql://postgres-sql-bsn:5432/book_social_network
 ENV KEYCLOAK_URL=http://keycloak:8080/realms/book-social-network
 ENV ACTIVE_PROFILE=${PROFILE}
-ENV JAR_VERSION=${APP_VERSION}
-ENV EMAIL_HOST_NAME: missing_host_name
-ENV EMAIL_USER_NAME: missing_user_name
-ENV EMAIL_PASSWORD: missing_password
+# ENV JAR_VERSION=${APP_VERSION}
 
 # CMD ["java -jar -Dspring.profiles.active=$ACTIVE_PROFILE -Dspring.datasource.url=$DB_URL book-network-$JAR_VERSION.jar"]
-CMD java -jar -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL} book-network-${JAR_VERSION}.jar
+CMD java -jar -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL} app.jar
 #CMD ["java", \
 #     "-jar", \
 #     "-Dspring.profiles.active=${ACTIVE_PROFILE}", \

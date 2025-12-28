@@ -26,18 +26,19 @@ jobs:
           cd book-network-ui-vue
           echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
 
-      - name: Login to DockerHub # 登录DockerHub
+      - name: Login to Aliyun ACR
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ${{ secrets.ALIYUN_ACR_REGISTRY }}
+          username: ${{ secrets.ALIYUN_ACR_USERNAME }}
+          password: ${{ secrets.ALIYUN_ACR_PASSWORD }}
 
-      - name: Build & Push to DH # 构建镜像并推送到DockerHub
+      - name: Build & Push to Aliyun ACR
         uses: docker/build-push-action@v5
         with:
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/bsn-ui:${{ steps.extract_version.outputs.VERSION }}, ${{ secrets.DOCKERHUB_USERNAME }}/bsn-ui:latest # 为镜像指定名称和标签
-          file: docker/frontend/Dockerfile # 指定 Dockerfile 的路径
-          context: book-network-ui-vue # 若 Dockerfile 在前端项目根目录下，则无需提供后端项目文件名，为`.`即可
+          tags: ${{ secrets.ALIYUN_ACR_REGISTRY }}/${{ secrets.ALIYUN_ACR_NAMESPACE }}/bsn-ui:${{ steps.extract_version.outputs.VERSION }}
+          file: docker/frontend/Dockerfile
+          context: book-network-ui-vue
           push: 'true'
           platforms: linux/amd64
 

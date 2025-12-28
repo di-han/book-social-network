@@ -46,7 +46,10 @@ services:
     command: start-dev --import-realm
   bsn-api:
     container_name: bsn-api
-    image: handi8/bsn:1.0.0
+    # 原 DockerHub 地址
+    # image: handi8/bsn-api:1.0.0
+    # 新 ACR 地址
+    image: crpi-15ziwmcunjcw6wf0.cn-hangzhou.personal.cr.aliyuncs.com/handi/bsn-api:1.0.0
     ports:
       - 8088:8088
     volumes:
@@ -57,7 +60,10 @@ services:
       - postgres
   bsn-ui:
     container_name: bsn-ui
-    image: handi8/bsn-ui:1.0.0
+    # 原 DockerHub 地址
+    # image: handi8/bsn-ui:1.0.0
+    # 新 ACR 地址
+    image: crpi-15ziwmcunjcw6wf0.cn-hangzhou.personal.cr.aliyuncs.com/handi/bsn-ui:1.0.0
     ports:
       - 8080:80
     networks:

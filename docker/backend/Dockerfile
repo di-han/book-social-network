@@ -41,15 +41,13 @@ EXPOSE 8088
 ENV DB_URL=jdbc:postgresql://postgres-sql-bsn:5432/book_social_network
 ENV KEYCLOAK_URL=http://keycloak:8080/realms/book-social-network
 ENV ACTIVE_PROFILE=${PROFILE}
-# ENV JAR_VERSION=${APP_VERSION}
 
 # CMD ["java -jar -Dspring.profiles.active=$ACTIVE_PROFILE -Dspring.datasource.url=$DB_URL book-network-$JAR_VERSION.jar"]
-CMD java -jar -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL} app.jar
-#CMD ["java", \
-#     "-jar", \
-#     "-Dspring.profiles.active=${ACTIVE_PROFILE}", \
-#     "-Dspring.datasource.url=${DB_URL}", \
-#     "book-network-${JAR_VERSION}.jar"]
+# CMD java -jar -Dspring.profiles.active=${ACTIVE_PROFILE} -Dspring.datasource.url=${DB_URL} app.jar
+CMD ["sh", "-c", "java \
+  -Dspring.profiles.active=${ACTIVE_PROFILE} \
+  -Dspring.datasource.url=${DB_URL} \
+  -jar app.jar"]
 
 
 

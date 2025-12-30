@@ -80,13 +80,13 @@ jobs:
             cd /ci-cd
             
             # Pull latest image
-            docker compose -f docker-compose.yml pull
+            docker compose -f docker-compose.yml --env-file .env pull
           
             # 停止并移除旧容器
-            docker compose -f docker-compose.yml down
+            docker compose -f docker-compose.yml --env-file .env down
           
             # 启动新容器
-            docker compose -f docker-compose.yml up -d
+            docker compose -f docker-compose.yml --env-file .env up -d
           
             # 清理旧镜像
             docker image prune -f

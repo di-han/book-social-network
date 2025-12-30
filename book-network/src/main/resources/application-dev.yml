@@ -41,7 +41,7 @@ spring:
           jwk-set-uri: "http://keycloak:8080/auth/realms/book-social-network/protocol/openid-connect/certs"
 application:
   cors:
-    origins: http://localhost:5173, http://localhost:8080, http://47.97.169.64:8080, http://47.97.169.64:8088
+    origins: http://localhost:5173, http://localhost:8080, https://47.97.169.64
 #  security:
 #    jwt:
 #      secret-key: 1fa1f80fd9c12472df8faa8fc41d213774937951f65ef878a72513f5871938ee

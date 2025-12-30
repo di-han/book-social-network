@@ -47,7 +47,8 @@ services:
       KC_HOSTNAME_STRICT_HTTPS: false
       KC_HOSTNAME_STRICT: false
       # KC_PROXY: edge
-      # KC_PROXY_HEADERS: forwarded
+      KC_PROXY_ADDRESS_FORWARDING: 'true'
+      KC_PROXY_HEADERS: xforwarded
       KC_HTTP_RELATIVE_PATH: /auth
       KC_HTTP_ENABLED: true
       KC_METRICS_ENABLED: true
